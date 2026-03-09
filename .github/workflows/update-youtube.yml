@@ -25,10 +25,12 @@ jobs:
           VIDEO_ID=$(grep -oPm1 "(?<=<yt:videoId>)[^<]+" youtube.xml)
           echo "{ \"videoId\": \"$VIDEO_ID\" }" > data/youtube.json
 
+
       - name: Commit changes
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
-          git add data/youtube.json
-          git commit -m "Update latest YouTube video" || echo "No changes"
-          git push
+            git config --global user.name "github-actions"
+            git config --global user.email "actions@github.com"
+            git add data/youtube.json
+            git diff --cached --quiet || git commit -m "Update latest YouTube video"
+            git push
+
