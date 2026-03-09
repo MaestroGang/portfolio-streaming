@@ -1,0 +1,34 @@
+name: Update YouTube Latest Video
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create data folder
+        run: mkdir -p data
+
+      - name: Fetch YouTube RSS
+        run: |
+          curl -s https://www.youtube.com/feeds/videos.xml?channel_id=UCUcXH4QwZmM4kRj0v3MVKbg -o youtube.xml
+
+      - name: Extract latest video ID
+        run: |
+          VIDEO_ID=$(grep -oPm1 "(?<=<yt:videoId>)[^<]+" youtube.xml)
+          echo "{ \"videoId\": \"$VIDEO_ID\" }" > data/youtube.json
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add data/youtube.json
+          git commit -m "Update latest YouTube video" || echo "No changes"
+          git push
