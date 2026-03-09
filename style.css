@@ -1,0 +1,161 @@
+body{
+    margin:0;
+    background:#0a0a0a;
+    color:white;
+    font-family:Poppins;
+    overflow-x:hidden;
+    position:relative;
+    }
+    
+    canvas#particles{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    }
+    
+    header{
+    padding:60px 20px;
+    text-align:center;
+    position:relative;
+    z-index:1;
+    }
+    
+    .profile-pic{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #ff2a2a;
+    box-shadow:0 0 40px #ff2a2a, 0 0 80px #ff2a2a;
+    }
+    
+    h1{
+    font-family:Orbitron;
+    font-size:56px;
+    background:linear-gradient(90deg,#ff2a2a,#ff4f00,#7a5cff);
+    background-clip:text;
+    -webkit-background-clip:text;
+    color:transparent;
+    }
+    
+    .subtitle{
+    opacity:0.8;
+    margin-top:12px;
+    font-size:18px;
+    }
+    
+    .bio{
+    margin-top:15px;
+    opacity:0.7;
+    max-width:600px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.5;
+    }
+    
+    .social-buttons{
+    margin-top:30px;
+    }
+    
+    .social-buttons a{
+    margin:10px;
+    padding:12px 24px;
+    border-radius:30px;
+    background:#111;
+    color:white;
+    text-decoration:none;
+    transition:0.3s;
+    }
+    
+    .social-buttons a:hover{
+    background:#ff2a2a;
+    }
+    
+    .section{
+    padding:60px 10%;
+    position:relative;
+    z-index:1;
+    }
+    
+    h2{
+    font-family:Orbitron;
+    font-size:32px;
+    margin-bottom:30px;
+    }
+    
+    .live-container{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    }
+    
+    .live-wrapper{
+    flex:2;
+    box-shadow:0 0 40px #ff2a2a;
+    border-radius:12px;
+    overflow:hidden;
+    }
+    
+    .live-wrapper iframe{
+    width:100%;
+    aspect-ratio:16/9;
+    border:none;
+    }
+    
+    .chat{
+    flex:1;
+    min-width:300px;
+    }
+    
+    .chat iframe{
+    width:100%;
+    height:500px;
+    border:none;
+    border-radius:12px;
+    }
+    
+    .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+    }
+    
+    .card{
+    background:#111;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 0 20px rgba(255,42,42,0.3);
+    }
+    
+    .clip{
+    width:100%;
+    height:300px;
+    border:none;
+    border-radius:10px;
+    }
+    
+    .stats{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:40px;
+    }
+    
+    .stat{
+    background:#111;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    flex:1 1 150px;
+    }
+    
+    footer{
+    text-align:center;
+    padding:40px;
+    opacity:0.6;
+    }
+    
