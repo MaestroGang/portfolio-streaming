@@ -1,6 +1,9 @@
 name: Update YouTube Latest Video
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: "*/30 * * * *"
   workflow_dispatch:
@@ -18,19 +21,28 @@ jobs:
 
       - name: Fetch YouTube RSS
         run: |
-          curl -s https://www.youtube.com/feeds/videos.xml?channel_id=UCUcXH4QwZmM4kRj0v3MVKbg -o youtube.xml
+          curl -L https://www.youtube.com/feeds/videos.xml?channel_id=UCUcXH4QwZmM4kRj0v3MVKbg -o youtube.xml
 
       - name: Extract latest video ID
         run: |
-          VIDEO_ID=$(grep -oPm1 "(?<=<yt:videoId>)[^<]+" youtube.xml)
-          echo "{ \"videoId\": \"$VIDEO_ID\" }" > data/youtube.json
+          VIDEO_ID=$(grep -oPm1 "(?<=<yt:videoId>)[^<]+" youtube.xml || true)
 
+          if [ -z "$VIDEO_ID" ]; then
+            echo '{ "videoId": "dQw4w9WgXcQ" }' > data/youtube.json
+          else
+            echo "{ \"videoId\": \"$VIDEO_ID\" }" > data/youtube.json
+          fi
 
       - name: Commit changes
         run: |
-            git config --global user.name "github-actions"
-            git config --global user.email "actions@github.com"
-            git add data/youtube.json
-            git diff --cached --quiet || git commit -m "Update latest YouTube video"
-            git push
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
 
+          git add data/youtube.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update latest YouTube video"
+            git push
+          fi
